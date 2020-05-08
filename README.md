@@ -1,4 +1,4 @@
-# screensaver_prevent
+# prevent_screensaver
 Keep prevent from running screensaver.  
 
 # Requirements
