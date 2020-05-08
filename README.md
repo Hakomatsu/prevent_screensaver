@@ -9,5 +9,5 @@ Keep prevent from running screensaver.
 > python -m pip install [-U] idleTime  
 
 # How to run
-Simply run `move_cursor.py` with following command.  
-> python move_cursor.py  
+Simply run `prevent_screensaver.py` with following command.  
+> python prevent_screensaver.py  
