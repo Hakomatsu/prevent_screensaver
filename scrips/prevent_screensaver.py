@@ -7,15 +7,22 @@ import numpy
 from idleTime import idle
 
 class PreventScreensaver:
-    def __init__(self, start_prevent):
+    def __init__(self):
         self.is_idle = False
-        self.start = start_prevent
+        self.start = False
+        self.duration = 180
 
-    def detect_idle(self, duration=180):
+    def set_start_flag(self, flag):
+        self.start = flag
+
+    def set_duration(self, duration):
+        self.duration = duration
+
+    def detect_idle(self):
         dur = idle.get_idle_duration()
-        time.sleep(duration)
+        time.sleep(self.duration)
         print(dur)
-        if dur >= duration-5:
+        if dur >= self.duration-5:
             print("idle detected")
             self.is_idle = True
         else:
@@ -33,10 +40,10 @@ class PreventScreensaver:
         pyautogui.press("volumeup", presses=5)
         time.sleep(1)
 
-    def surveillance_loop(self, duration=180):
+    def surveillance_loop(self):
         try:
-            while self.start:
-                self.detect_idle(duration=duration)
+            while True:
+                self.detect_idle()
                 if self.is_idle:
                     self.move_cursor()
                     self.volume_control()
@@ -44,6 +51,19 @@ class PreventScreensaver:
         except KeyboardInterrupt:
             print("finish")
 
+    def surveillance(self):
+        try:
+            self.detect_idle()
+            if self.is_idle:
+                self.move_cursor()
+                self.volume_control()
+                self.is_idle = False
+        except KeyboardInterrupt:
+            print("finish")
+   
+"""   
 if __name__ == "__main__":
-    ps = PreventScreensaver(start_prevent=True)
-    ps.surveillance_loop(5)
+    ps = PreventScreensaver()
+    ps.set_duration(5)
+    ps.surveillance_loop()
+"""
