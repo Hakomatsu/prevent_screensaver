@@ -8,7 +8,7 @@ import wx
 import wx.adv
 import prevent_screensaver as ps
 
-TRAY_TOOLTIP = "Screensaver Prevent"
+TRAY_TOOLTIP = "Prevent Screensaver"
 TRAY_ICON = "icon.ico"
 
 def create_menu_item(menu, label, func):
@@ -37,7 +37,7 @@ class TaskBarIcon(wx.adv.TaskBarIcon):
         create_menu_item(menu, "Exit", self.on_exit)
         return menu
     
-    def set_icon(self, name):
+    def set_icon(self, path):
         icon = wx.Icon(wx.Bitmap(path))
         self.SetIcon(icon, TRAY_TOOLTIP)
     
