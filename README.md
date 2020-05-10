@@ -1,5 +1,5 @@
 # prevent_screensaver
-Keep prevent from running screensaver.  
+A simple script to prevent screensaver from being activated.  
 
 # Requirements
 - PyAutoGUI  
@@ -8,6 +8,17 @@ Keep prevent from running screensaver.
 - idleTime  
 > python -m pip install [-U] idleTime  
 
+- wxPython
+> python -m pip install [-U] wxPython  
+
 # How to run
-Simply run `prevent_screensaver.py` with following command.  
-> python prevent_screensaver.py  
+1. Simply run `main.py` with following command.  
+> python main.py  
+
+2. Run execute file stored in `bin/dist/`.
+> prevent_screensaver.exe  
+
+# Environment
+- Windows10  
+- Visual Studio Code
+- Python 3.7.7
