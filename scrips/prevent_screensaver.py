@@ -6,16 +6,15 @@ import time
 import numpy
 from idleTime import idle
 
-# ループ回すと抜けられない．ループ回さないと１回で落ちる
-# スレッド化したほうがよい．
 class PreventScreensaver:
     def __init__(self):
         self.is_idle = False
-        self.start = False
+        self.condition = False
         self.duration = 60
 
-    def set_start_flag(self, flag):
-        self.start = flag
+    def set_flag(self, flag):
+        self.condition = flag
+        self.surveillance_loop()
 
     def set_duration(self, duration):
         self.duration = duration
@@ -43,27 +42,19 @@ class PreventScreensaver:
         time.sleep(1)
 
     def surveillance_loop(self):
-        print("Start screensaver preventation")
+        print(self.condition)
+        if self.condition:
+            print("Start screensaver preventation")
+        else:
+            print("Stop screensaver preventation")
         try:
-            while True:
+            while self.condition:
                 self.detect_idle()
                 if self.is_idle:
-                    self.move_cursor()
                     self.volume_control()
                     self.is_idle = False
-        except KeyboardInterrupt:
-            print("finish")
-
-    def surveillance(self):
-        print("Start screensaver preventation")
-        try:
-            self.detect_idle()
-            if self.is_idle:
-                # self.move_cursor()
-                self.volume_control()
-                self.is_idle = False
-        except KeyboardInterrupt:
-            print("finish")
+        except:
+            print("Error")
    
 if __name__ == "__main__":
     ps = PreventScreensaver()
